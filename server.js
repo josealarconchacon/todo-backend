@@ -34,6 +34,19 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Root endpoint
+app.get("/", (req, res) => {
+  res.json({
+    message: "Todo API is running",
+    endpoints: {
+      health: "/api/health",
+      todos: "/api/todos",
+      docs: "Check your API documentation",
+    },
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // Routes
 app.use("/api/todos", todoRoutes);
 
