@@ -8,10 +8,19 @@ import { errorHandler } from "./middleware/errorHandler.js";
 // Load environment variables
 dotenv.config();
 
+console.log("🔧 Starting server initialization...");
+console.log("📋 Environment check:");
+console.log("- PORT:", process.env.PORT || 3000);
+console.log(
+  "- MONGODB_URI:",
+  process.env.MONGODB_URI ? "✅ Set" : "❌ Missing"
+);
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
+console.log("🔌 Attempting to connect to MongoDB...");
 connectDB().catch((error) => {
   console.error("Failed to connect to MongoDB:", error);
   process.exit(1);
@@ -70,7 +79,13 @@ app.use("*", (req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📊 API available at http://localhost:${PORT}/api`);
-});
+app
+  .listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`📊 API available at http://localhost:${PORT}/api`);
+    console.log(`🌐 Render URL: https://todo-backend-4ua1.onrender.com`);
+  })
+  .on("error", (error) => {
+    console.error("❌ Server failed to start:", error);
+    process.exit(1);
+  });
