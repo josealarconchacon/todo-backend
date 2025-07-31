@@ -36,8 +36,8 @@ app.use(
       "http://localhost:4173",
       "http://127.0.0.1:5173",
       "http://127.0.0.1:3000",
-      process.env.FRONTEND_URL, // Add your Vercel frontend URL
-    ].filter(Boolean), // Remove undefined values
+      process.env.FRONTEND_URL, // add your Vercel frontend URL
+    ].filter(Boolean), // remove undefined values
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
